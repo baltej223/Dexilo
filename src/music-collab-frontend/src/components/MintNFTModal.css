@@ -1,0 +1,228 @@
+/* MintNFTModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.mint-nft-modal {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  color: #e2e8f0;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #f8fafc;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.mint-form {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #f8fafc;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: #f8fafc;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Special styling for project select dropdown */
+.project-select {
+  background: rgba(30, 41, 59, 0.95) !important;
+  color: #f8fafc !important;
+  border: 2px solid rgba(59, 130, 246, 0.4) !important;
+}
+
+.project-select option {
+  background: rgba(30, 41, 59, 0.95) !important;
+  color: #f8fafc !important;
+  padding: 8px 12px;
+  border: none;
+}
+
+.project-select option:hover,
+.project-select option:focus,
+.project-select option:checked {
+  background: rgba(59, 130, 246, 0.8) !important;
+  color: #ffffff !important;
+}
+
+.project-select option[disabled] {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #fca5a5 !important;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 5px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.helper-text {
+  color: #fbbf24;
+  font-size: 12px;
+  margin-top: 10px;
+  padding: 12px;
+  background: rgba(251, 191, 36, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.helper-text p {
+  margin: 0 0 8px 0;
+  color: #fbbf24;
+}
+
+.helper-text .btn-secondary.small {
+  padding: 6px 12px;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.helper-text a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.helper-text a:hover {
+  text-decoration: underline;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary,
+.btn-primary {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mint-nft-modal {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-secondary,
+  .btn-primary {
+    width: 100%;
+  }
+}

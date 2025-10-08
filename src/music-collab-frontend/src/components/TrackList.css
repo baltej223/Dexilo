@@ -1,0 +1,307 @@
+/* Track List Styles - OpenSea Inspired */
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+/* Current player section */
+.current-player {
+  background: var(--success-light);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--success-medium);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.current-player::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--success);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.current-player .audio-player {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+.empty-tracks {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--text-secondary);
+  background: var(--background-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-light);
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-tertiary);
+}
+
+.empty-tracks h3 {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.track-item {
+  background: var(--background-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.track-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.track-item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-medium);
+  transform: translateY(-1px);
+}
+
+.track-item:hover::before {
+  opacity: 1;
+}
+
+/* Current track highlighting */
+.track-item.current-track {
+  background: var(--primary-light);
+  border: 1px solid var(--primary-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.track-item.current-track::before {
+  opacity: 1;
+  background: var(--primary);
+}
+
+.track-item.current-track:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.track-info {
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.track-name {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.4;
+}
+
+.playing-indicator {
+  color: var(--primary);
+  font-size: 1.2rem;
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.track-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.track-meta span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.track-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.track-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-md);
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-play {
+  background: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-play:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-play.playing {
+  background: var(--warning);
+  animation: playing-pulse 2s ease-in-out infinite;
+}
+
+@keyframes playing-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 193, 7, 0);
+  }
+}
+
+.btn-download {
+  background: var(--info);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-download:hover {
+  background: var(--info-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-danger {
+  background: var(--error);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-danger:hover {
+  background: var(--error-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-small {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-secondary {
+  background: var(--background-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+
+.btn-secondary:hover {
+  background: var(--border-light);
+  border-color: var(--border-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .track-list {
+    padding: 0.25rem;
+  }
+  
+  .track-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  
+  .track-info {
+    margin-right: 0;
+  }
+  
+  .track-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .track-actions button {
+    flex: 1;
+    min-width: 100px;
+    justify-content: center;
+  }
+  
+  .track-meta {
+    font-size: 0.8rem;
+  }
+  
+  .current-player {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .empty-tracks {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .track-item {
+    padding: 1rem;
+  }
+  
+  .track-name {
+    font-size: 1rem;
+  }
+  
+  .track-actions button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .btn-small {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}

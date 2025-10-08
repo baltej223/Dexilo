@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/music-collab-backend"
+]
+resolver = "2"

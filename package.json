@@ -1,0 +1,39 @@
+{
+  "name": "music-collab",
+  "version": "1.0.0",
+  "description": "A decentralized music collaboration platform built on Internet Computer Protocol with advanced NFT waveform visualizations",
+  "keywords": [
+    "music",
+    "collaboration",
+    "blockchain",
+    "nft",
+    "internet-computer",
+    "waveform",
+    "visualization",
+    "rust",
+    "react",
+    "web3"
+  ],
+  "author": "Music Collab Studio",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "prebuild": "npm run prebuild --workspaces --if-present",
+    "pretest": "npm run prebuild --workspaces --if-present",
+    "start": "npm start --workspaces --if-present",
+    "test": "npm test --workspaces --if-present"
+  },
+  "type": "module",
+  "workspaces": [
+    "src/music-collab-frontend"
+  ],
+  "dependencies": {
+    "@dfinity/auth-client": "^2.4.1",
+    "@pinata/sdk": "^2.1.0",
+    "axios": "^1.10.0"
+  }
+}

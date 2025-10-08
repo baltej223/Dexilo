@@ -1,0 +1,8 @@
+[
+  {
+    "match": "**/*",
+    "headers": {
+      "Content-Security-Policy": "default-src 'self' data: blob:; connect-src 'self' http://localhost:* https://icp0.io https://*.icp0.io https://icp-api.io https://api.pinata.cloud https://gateway.pinata.cloud https://ipfs.io https://cloudflare-ipfs.com; media-src 'self' data: blob: https://gateway.pinata.cloud https://ipfs.io https://cloudflare-ipfs.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:;"
+    }
+  }
+]

@@ -1,0 +1,39 @@
+type MusicProject = record {
+  id: nat64;
+  title: text;
+  description: text;
+  owner: text;
+  contributors: vec text;
+  tracks: vec Track;
+};
+
+type Track = record {
+  id: nat64;
+  name: text;
+  ipfs_hash: text;
+  uploaded_by: text;
+  timestamp: nat64;
+};
+
+type NFTMetadata = record {
+  id: nat64;
+  name: text;
+  description: text;
+  image_url: text;
+  creator: text;
+  project_id: nat64;
+  price: nat64;
+};
+
+service : {
+  create_project: (text, text, text) -> (nat64);
+  add_track: (nat64, text, text, text, nat64) -> (bool);
+  get_project: (nat64) -> (opt MusicProject) query;
+  list_projects: () -> (vec MusicProject) query;
+  add_contributor: (nat64, text) -> (bool);
+  remove_track: (nat64, nat64) -> (bool);
+  get_project_tracks: (nat64) -> (vec Track) query;
+  mint_nft: (text, text, text, text, nat64, nat64) -> (nat64);
+  list_nfts: () -> (vec NFTMetadata) query;
+  get_nft: (nat64) -> (opt NFTMetadata) query;
+}

@@ -1,0 +1,38 @@
+{
+  "canisters": {
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+    },
+    "music-collab-backend": {
+      "candid": "src/music-collab-backend/music-collab-backend.did",
+      "package": "music-collab-backend",
+      "type": "rust"
+    },
+    "music-collab-frontend": {
+      "dependencies": [
+        "music-collab-backend"
+      ],
+      "source": [
+        "src/music-collab-frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "music-collab-frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
