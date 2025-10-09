@@ -14,7 +14,7 @@
     "react",
     "web3"
   ],
-  "author": "Music Collab Studio",
+  "author": "Dexilo",
   "license": "MIT",
   "engines": {
     "node": ">=16.0.0",

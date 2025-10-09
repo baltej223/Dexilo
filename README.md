@@ -1,4 +1,4 @@
-# 🎵 Music Collab Studio
+# 🎵 Dexilo
 
 A decentralized music collaboration platform built on the Internet Computer Protocol (ICP) blockchain. Create, collaborate, and monetize your music with blockchain-powered NFTs featuring stunning waveform visualizations.
 

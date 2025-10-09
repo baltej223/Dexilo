@@ -1,8 +1,8 @@
-# 🎵 Music Collab Studio - Features
+# 🎵 Dexilo - Features
 
 ## Overview
 
-Music Collab Studio is a cutting-edge decentralized platform that revolutionizes music collaboration and monetization through blockchain technology. Built on the Internet Computer Protocol (ICP), it offers musicians, artists, and creators a secure, decentralized environment to create, collaborate, and monetize their work.
+Dexilo is a cutting-edge decentralized platform that revolutionizes music collaboration and monetization through blockchain technology. Built on the Internet Computer Protocol (ICP), it offers musicians, artists, and creators a secure, decentralized environment to create, collaborate, and monetize their work.
 
 ## 🎼 Core Features
 

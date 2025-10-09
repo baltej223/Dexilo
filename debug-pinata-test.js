@@ -7,7 +7,7 @@ async function directPinataTest() {
   const SECRET_KEY = 'uoir_secrer_key';
   
   // Create a simple test file
-  const testContent = 'Hello from Music Collab Studio!';
+  const testContent = 'Hello from Dexilo!';
   const file = new File([testContent], 'test.txt', { type: 'text/plain' });
   
   console.log('📄 Created test file:', file.name, file.size, 'bytes');

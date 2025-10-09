@@ -29,7 +29,7 @@ Your music collaboration app now has **production-ready IPFS integration** with 
 
 # 🔧 Pinata IPFS Configuration Guide
 
-This guide will help you set up Pinata for IPFS storage in your Music Collab Studio.
+This guide will help you set up Pinata for IPFS storage in your Dexilo.
 
 ## Step 1: Create Pinata Account
 
