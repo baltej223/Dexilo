@@ -220,7 +220,7 @@ function App() {
       return (
         <div className="login-screen">
           <div className="login-content">
-            <h1>🎵 Music Collab Studio</h1>
+            <h1>🎵 Dexilo</h1>
             <p>Collaborate, create, and monetize your music on the decentralized web</p>
             <div className="login-features">
               <div className="feature">
@@ -299,7 +299,7 @@ function App() {
         return (
           <div className="dashboard">
             <div className="dashboard-header">
-              <h1>Welcome to Music Collab Studio</h1>
+              <h1>Welcome to Dexilo</h1>
               <p>Collaborate, create, and monetize your music on the decentralized web</p>
             </div>
             <div className="dashboard-stats">

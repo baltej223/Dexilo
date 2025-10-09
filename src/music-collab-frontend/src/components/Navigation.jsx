@@ -22,7 +22,7 @@ const Navigation = ({ currentView, onViewChange, user, onLogout }) => {
     <nav className="navigation">
       <div className="nav-brand">
         <span className="nav-logo">🎼</span>
-        <span className="nav-title">Music Collab Studio</span>
+        <span className="nav-title">Dexilo</span>
       </div>
       
       <div className="nav-items">
