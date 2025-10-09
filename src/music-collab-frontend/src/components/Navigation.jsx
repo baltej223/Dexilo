@@ -33,8 +33,7 @@ const Navigation = ({ currentView, onViewChange, user, onLogout }) => {
             onClick={() => onViewChange(item.id)}
             title={item.label}
           >
-            <span className="nav-icon">{item.icon}</span>
-            <span className="nav-label">{item.label}</span>
+          <span className="nav-label">{item.label}</span>
           </button>
         ))}
       </div>
