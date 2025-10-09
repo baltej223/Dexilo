@@ -1,4 +1,4 @@
-# 🎵 Music Collaboration App - IPFS Integration Complete
+# 🎵 Dexilo - IPFS Integration Complete
 
 ## ✅ What We've Accomplished
 

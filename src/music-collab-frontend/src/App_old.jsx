@@ -126,7 +126,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>🎵 Music Collaboration Platform</h1>
+        <h1>🎵 Dexilo</h1>
         <p>Create, collaborate, and share your music projects</p>
       </header>
       <main className="App-main">

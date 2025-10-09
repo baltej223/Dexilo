@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides a comprehensive overview of the Dexilo project structure, explaining the organization, architecture, and key components of the decentralized music collaboration platform.
+This document provides a comprehensive overview of the Dexilo project structure, explaining the organization, architecture, and key components of the decentralized Dexilo.
 
 ## 📁 Root Directory Structure
 
