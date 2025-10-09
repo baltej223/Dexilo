@@ -21,7 +21,7 @@ const Navigation = ({ currentView, onViewChange, user, onLogout }) => {
   return (
     <nav className="navigation">
       <div className="nav-brand">
-        <span className="nav-logo">🎼</span>
+        <img src="/dexilogo.png" alt="Dexilo Logo" className="nav-logo" />
         <span className="nav-title">Dexilo</span>
       </div>
       
@@ -61,10 +61,10 @@ const Navigation = ({ currentView, onViewChange, user, onLogout }) => {
             </div>
             <div className="user-menu-divider"></div>
             <button className="user-menu-item" onClick={() => navigator.clipboard.writeText(user?.principal)}>
-              📋 Copy Principal ID
+              Copy Principal ID
             </button>
             <button className="user-menu-item logout" onClick={handleLogout}>
-              🚪 Logout
+              Logout
             </button>
           </div>
         )}

@@ -321,19 +321,19 @@ function App() {
                 className="btn-primary large"
                 onClick={() => setCurrentView('create')}
               >
-                🎵 Start New Project
+                Start New Project
               </button>
               <button 
                 className="btn-secondary large"
                 onClick={() => setCurrentView('projects')}
               >
-                📁 Browse Projects
+                Browse Projects
               </button>
               <button 
                 className="btn-secondary large"
                 onClick={() => setCurrentView('nft')}
               >
-                💎 NFT Marketplace
+                NFT Marketplace
               </button>
             </div>
           </div>

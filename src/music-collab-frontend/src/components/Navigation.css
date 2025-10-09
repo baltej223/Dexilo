@@ -26,8 +26,9 @@
 }
 
 .nav-logo {
-  font-size: 1.8rem;
-  color: var(--primary-color);
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .nav-title {

@@ -90,34 +90,34 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
               onClick={() => setFilter('all')}
               data-filter="all"
             >
-              🌐 All NFTs
+              All NFTs
             </button>
             <button 
               className={`filter-tab ${filter === 'my' ? 'active' : ''}`}
               onClick={() => setFilter('my')}
               data-filter="my"
             >
-              👤 My NFTs
+              My NFTs
             </button>
             <button 
               className={`filter-tab ${filter === 'available' ? 'active' : ''}`}
               onClick={() => setFilter('available')}
               data-filter="available"
             >
-              🛒 Available
+              Available
             </button>
           </div>
           <button 
             className="btn-primary"
             onClick={() => setShowMintModal(true)}
           >
-            💎 Quick Mint
+            Quick Mint
           </button>
           <button 
             className="btn-secondary"
             onClick={() => setShowWaveformModal(true)}
           >
-            🎵 Audio NFT
+            Audio NFT
           </button>
         </div>
       </div>
