@@ -123,7 +123,7 @@ const WaveformNFTModal = ({ projects, onSubmit, onClose, user }) => {
       case 1:
         return (
           <div className="step-content">
-            <h3>🎵 Create Audio NFT - Step 1</h3>
+            <h3>Create Audio NFT - Step 1</h3>
             <div className="form-group">
               <label htmlFor="name">NFT Name *</label>
               <input
@@ -177,7 +177,7 @@ const WaveformNFTModal = ({ projects, onSubmit, onClose, user }) => {
               </select>
               {(!projects || projects.length === 0) && (
                 <small className="helper-text">
-                  You need to create a music project first before minting NFTs. 
+                  You need to create a music project first before minting NFTs.<br/>
                   <a href="#" onClick={(e) => { e.preventDefault(); onClose(); }}>
                     Go to Projects
                   </a>
@@ -219,7 +219,7 @@ const WaveformNFTModal = ({ projects, onSubmit, onClose, user }) => {
       case 2:
         return (
           <div className="step-content">
-            <h3>🎵 Create Audio NFT - Step 2</h3>
+            <h3>Create Audio NFT - Step 2</h3>
             
             <div className="waveform-style-selection">
               <h4>Choose Waveform Style</h4>
@@ -272,7 +272,7 @@ const WaveformNFTModal = ({ projects, onSubmit, onClose, user }) => {
       case 3:
         return (
           <div className="step-content">
-            <h3>🎵 Create Audio NFT - Step 3</h3>
+            <h3>Create Audio NFT - Step 3</h3>
             
             {showSuccessMessage && (
               <div className="success-message">
@@ -342,7 +342,7 @@ const WaveformNFTModal = ({ projects, onSubmit, onClose, user }) => {
     <div className="modal-overlay">
       <div className="waveform-nft-modal">
         <div className="modal-header">
-          <h3>💎 Create Audio NFT with Waveform</h3>
+          <h3>Create Audio NFT with Waveform</h3>
           <button className="close-btn" onClick={onClose}>✕</button>
         </div>
         

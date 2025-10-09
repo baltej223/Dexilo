@@ -1,31 +1,84 @@
+/* Clean Project Form Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--background-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
 .project-form {
-  background: var(--background-secondary);
-  border-radius: var(--border-radius-lg);
-  padding: 4rem;
-  border: 1px solid var(--border-color);
+  background: var(--background-primary);
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 2px solid var(--border-color);
   color: var(--text-primary);
+  max-height: 90vh;
+  position: relative;
 }
 
 .form-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 .form-header h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: var(--text-primary);
   margin: 0;
+}
+
+.close-btn {
+  background: var(--background-secondary);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.8rem;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.close-btn:hover {
+  background: var(--background-tertiary);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.step-content {
+  min-height: 200px;
+  position: relative;
+}
+
+.step-content h3 {
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .form-group {
@@ -44,8 +97,8 @@
 .form-group textarea {
   padding: 12px 16px;
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
-  background: var(--background-primary);
+  border-radius: 12px;
+  background: var(--background-secondary);
   color: var(--text-primary);
   font-size: 16px;
   transition: all 0.3s ease;

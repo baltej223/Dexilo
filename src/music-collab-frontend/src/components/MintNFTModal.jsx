@@ -47,7 +47,7 @@ const MintNFTModal = ({ projects, onSubmit, onClose, onRefreshProjects, user }) 
     <div className="modal-overlay">
       <div className="mint-nft-modal">
         <div className="modal-header">
-          <h3>💎 Mint Music NFT</h3>
+          <h3>Mint Music NFT</h3>
           <button className="close-btn" onClick={onClose}>✕</button>
         </div>
         
@@ -127,7 +127,7 @@ const MintNFTModal = ({ projects, onSubmit, onClose, onRefreshProjects, user }) 
                         await onRefreshProjects();
                       }}
                     >
-                      🔄 Refresh Projects
+                      Refresh Projects
                     </button>
                   )}
                 </div>

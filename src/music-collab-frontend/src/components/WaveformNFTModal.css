@@ -1,34 +1,14 @@
-/* Futuristic Dark Themed Waveform NFT Modal Styles */
+/* Clean Dark Themed Waveform NFT Modal Styles */
 .waveform-nft-modal {
-  background: linear-gradient(145deg, #050508 0%, #0a0a0f 30%, #16213e 80%, #1a1a2e 100%);
+  background: var(--background-primary);
   border-radius: 24px;
   padding: 2.5rem;
   max-width: 900px;
   width: 90vw;
   max-height: 90vh;
   overflow-y: auto;
-  border: 2px solid rgba(0, 255, 255, 0.4);
-  box-shadow: 
-    0 25px 80px rgba(0, 0, 0, 0.95),
-    0 0 0 1px rgba(0, 255, 255, 0.2),
-    0 0 60px rgba(0, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 2px solid var(--border-color);
   position: relative;
-}
-
-.waveform-nft-modal::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 15% 15%, rgba(0, 255, 255, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(138, 43, 226, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 60%);
-  border-radius: 24px;
-  pointer-events: none;
 }
 
 .modal-overlay {
@@ -37,12 +17,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.92);
+  background: var(--background-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(15px) saturate(0.8);
 }
 
 .modal-header {
@@ -67,21 +46,16 @@
 }
 
 .modal-header h3 {
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 1.75rem;
   margin: 0;
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-  background: linear-gradient(45deg, #ffffff, #00ffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .close-btn {
-  background: linear-gradient(145deg, #1a1a2e, #0a0a0f);
-  border: 2px solid rgba(0, 255, 255, 0.4);
-  color: #00ffff;
+  background: var(--background-secondary);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
   font-size: 1.3rem;
   cursor: pointer;
   padding: 0.8rem;
@@ -92,20 +66,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 
-    0 6px 20px rgba(0, 0, 0, 0.6),
-    inset 0 2px 0 rgba(255, 255, 255, 0.15);
   font-weight: 700;
 }
 
 .close-btn:hover {
-  background: linear-gradient(145deg, #2a2a3e, #1a1a1f);
-  color: #ffffff;
-  transform: scale(1.08);
-  box-shadow: 
-    0 8px 25px rgba(0, 255, 255, 0.4),
-    inset 0 2px 0 rgba(255, 255, 255, 0.25);
-  border-color: rgba(0, 255, 255, 0.8);
+  background: var(--background-tertiary);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .step-indicator {
@@ -119,44 +86,26 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #1a1a2e, #0f0f0f);
-  color: rgba(255, 255, 255, 0.6);
+  background: var(--background-secondary);
+  color: var(--text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   font-size: 1.1rem;
   transition: all 0.3s ease;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--border-color);
   position: relative;
 }
 
 .step.active {
-  background: linear-gradient(145deg, #00ffff, #0099cc);
-  color: #000000;
-  border-color: rgba(0, 255, 255, 0.8);
-  box-shadow: 
-    0 8px 25px rgba(0, 255, 255, 0.4),
-    0 0 30px rgba(0, 255, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border-color: var(--primary-color);
   font-weight: 700;
 }
 
-.step.active::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #00ffff, #8a2be2, #00ffff);
-  border-radius: 50%;
-  z-index: -1;
-  animation: stepGlow 2s infinite;
-}
+
 
 .step-content {
   min-height: 300px;
@@ -164,11 +113,10 @@
 }
 
 .step-content h3 {
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 2rem;
   text-align: center;
   font-size: 1.4rem;
-  text-shadow: 0 2px 8px rgba(0, 255, 255, 0.4);
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -200,21 +148,15 @@
   font-weight: 500;
   transition: all 0.3s ease;
   box-sizing: border-box;
-  box-shadow: 
-    inset 0 3px 6px rgba(0, 0, 0, 0.4),
-    0 1px 0 rgba(255, 255, 255, 0.1);
+
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #00ffff;
-  box-shadow: 
-    0 0 0 3px rgba(0, 255, 255, 0.4),
-    inset 0 3px 6px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(0, 255, 255, 0.3);
-  background: linear-gradient(145deg, #16213e, #1a1a2e);
+  border-color: var(--primary-color);
+  background: var(--background-secondary);
 }
 
 .form-group input::placeholder,

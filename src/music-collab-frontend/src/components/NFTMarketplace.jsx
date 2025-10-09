@@ -82,7 +82,7 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
       )}
       
       <div className="marketplace-header">
-        <h2>🎵 Music NFT Marketplace</h2>
+        <h2>Music NFT Marketplace</h2>
         <div className="marketplace-actions">
           <div className="filter-tabs">
             <button 
