@@ -6,24 +6,29 @@
 }
 
 :root {
-  /* Clean Color Palette */
-  --primary-color: #1a1a1a;
-  --primary-hover: #495057;
-  --secondary-color: #6c757d;
-  --accent-blue: #007bff;
-  --accent-green: #28a745;
-  --accent-red: #dc3545;
-  --text-primary: #1a1a1a;
-  --text-secondary: #6c757d;
-  --text-tertiary: #adb5bd;
-  --background-primary: #ffffff;
-  --background-secondary: #f8f9fa;
-  --background-tertiary: #e9ecef;
-  --border-color: #dee2e6;
-  --border-light: #e9ecef;
-  --success-green: #28a745;
-  --warning-orange: #fd7e14;
-  --error-red: #dc3545;
+  /* Dark Mode Color Palette */
+  --primary-color: #4de5a6;
+  --primary-hover: #00cc92;
+  --secondary-color: #6d57ff;
+  --accent-blue: #6d57ff;
+  --accent-green: #4de5a6;
+  --accent-red: #de5242;
+  --accent-orange: #ff9900;
+  --accent-purple: #f093ff;
+  --accent-yellow: #ffe635;
+  --text-primary: #ffffff;
+  --text-secondary: #f6f6f6;
+  --text-tertiary: #6f6f6f;
+  --background-primary: #111111;
+  --background-secondary: #171420;
+  --background-tertiary: #1e1e2e;
+  --background-card: #0d1117;
+  --background-input: #0c1116;
+  --border-color: #1e1e2e;
+  --border-light: #171420;
+  --success-green: #4de5a6;
+  --warning-orange: #ff9900;
+  --error-red: #de5242;
 }
 
 body {
@@ -150,7 +155,7 @@ body {
   font-size: 1.1rem !important;
   padding: 1.2rem 2.5rem !important;
   background: var(--primary-color) !important;
-  color: #ffffff !important;
+  color: var(--background-primary) !important;
   border: 2px solid var(--primary-color) !important;
   border-radius: 24px !important;
   font-weight: 700 !important;
@@ -297,7 +302,7 @@ body {
 
 .btn-primary {
   background: var(--primary-color);
-  color: #ffffff;
+  color: var(--background-primary);
   border-color: var(--primary-color);
 }
 
@@ -320,13 +325,13 @@ body {
 
 .btn-danger {
   background: var(--error-red);
-  color: white;
+  color: var(--text-primary);
   border-color: var(--error-red);
 }
 
 .btn-danger:hover:not(:disabled) {
-  background: #c82333;
-  border-color: #c82333;
+  background: var(--error-red);
+  border-color: var(--error-red);
 }
 
 .btn-primary:disabled, .btn-secondary:disabled, .btn-danger:disabled {
@@ -482,9 +487,9 @@ body {
 /* High Contrast Mode Support */
 @media (prefers-contrast: high) {
   :root {
-    --border-color: rgba(0, 255, 255, 0.8);
+    --border-color: var(--primary-color);
     --text-primary: #ffffff;
-    --text-secondary: #ffffff;
+    --text-secondary: #f6f6f6;
   }
   
   .stat-card, .card {
@@ -526,19 +531,58 @@ body {
   border-radius: 24px;
   padding: 1.5rem 2rem;
   margin: 1rem 0;
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 600;
   position: relative;
   z-index: 1000;
 }
 
-.waveform-success, .mint-success, .upload-success, .creation-success {
+.waveform-success {
+  background: var(--accent-blue);
+  border: 2px solid var(--accent-blue);
+  border-radius: 24px;
+  padding: 1.5rem 2rem;
+  margin: 1rem 0;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1001;
+}
+
+.mint-success {
+  background: var(--accent-purple);
+  border: 2px solid var(--accent-purple);
+  border-radius: 24px;
+  padding: 1.5rem 2rem;
+  margin: 1rem 0;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1001;
+}
+
+.upload-success {
   background: var(--success-green);
   border: 2px solid var(--success-green);
   border-radius: 24px;
   padding: 1.5rem 2rem;
   margin: 1rem 0;
-  color: #ffffff;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1001;
+}
+
+.creation-success {
+  background: var(--accent-orange);
+  border: 2px solid var(--accent-orange);
+  border-radius: 24px;
+  padding: 1.5rem 2rem;
+  margin: 1rem 0;
+  color: var(--text-primary);
   font-weight: 700;
   font-size: 1rem;
   position: relative;
@@ -637,7 +681,7 @@ body {
 }
 
 .nav-item.active, .menu-item.active, .navigation-item.active {
-  color: #ffffff;
+  color: var(--background-primary);
   background: var(--primary-color);
   font-weight: 700;
 }
