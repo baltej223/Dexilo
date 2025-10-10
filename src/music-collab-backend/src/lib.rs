@@ -554,3 +554,6 @@ async fn upload_to_pinata(request: PinataUploadRequest) -> PinataUploadResponse 
 fn transform_response(args: TransformArgs) -> HttpResponse {
     args.response
 }
+
+// Export the Candid interface
+ic_cdk::export_candid!();

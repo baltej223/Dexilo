@@ -1,39 +1,87 @@
+type HttpHeader = record { value : text; name : text };
+type HttpResponse = record {
+  status : nat;
+  body : blob;
+  headers : vec HttpHeader;
+};
 type MusicProject = record {
-  id: nat64;
-  title: text;
-  description: text;
-  owner: text;
-  contributors: vec text;
-  tracks: vec Track;
+  id : nat64;
+  title : text;
+  owner : text;
+  tracks : vec Track;
+  description : text;
+  contributors : vec text;
 };
-
-type Track = record {
-  id: nat64;
-  name: text;
-  ipfs_hash: text;
-  uploaded_by: text;
-  timestamp: nat64;
-};
-
 type NFTMetadata = record {
-  id: nat64;
-  name: text;
-  description: text;
-  image_url: text;
-  creator: text;
-  project_id: nat64;
-  price: nat64;
+  id : nat64;
+  creator : text;
+  royalty_percentage : nat8;
+  image_url : text;
+  name : text;
+  view_count : nat64;
+  sale_history : vec Transaction;
+  description : text;
+  created_at : nat64;
+  category : text;
+  project_id : nat64;
+  price : nat64;
+  current_owner : text;
+  is_for_sale : bool;
 };
-
+type PinataUploadRequest = record {
+  api_key : text;
+  content_type : text;
+  file_data : blob;
+  file_name : text;
+  secret_key : text;
+};
+type PinataUploadResponse = record {
+  pin_size : nat64;
+  ipfs_hash : text;
+  error : opt text;
+  success : bool;
+};
+type Result = variant { Ok : text; Err : text };
+type RoyaltyPayment = record {
+  transaction_id : text;
+  nft_id : nat64;
+  recipient : text;
+  amount : nat64;
+};
+type Track = record {
+  id : nat64;
+  ipfs_hash : text;
+  name : text;
+  timestamp : nat64;
+  uploaded_by : text;
+};
+type Transaction = record {
+  to : text;
+  transaction_type : text;
+  from : text;
+  timestamp : nat64;
+  price : nat64;
+};
+type TransformArgs = record { context : blob; response : HttpResponse };
 service : {
-  create_project: (text, text, text) -> (nat64);
-  add_track: (nat64, text, text, text, nat64) -> (bool);
-  get_project: (nat64) -> (opt MusicProject) query;
-  list_projects: () -> (vec MusicProject) query;
-  add_contributor: (nat64, text) -> (bool);
-  remove_track: (nat64, nat64) -> (bool);
-  get_project_tracks: (nat64) -> (vec Track) query;
-  mint_nft: (text, text, text, text, nat64, nat64) -> (nat64);
-  list_nfts: () -> (vec NFTMetadata) query;
-  get_nft: (nat64) -> (opt NFTMetadata) query;
+  add_contributor : (nat64, text) -> (bool);
+  add_track : (nat64, text, text, text, nat64) -> (bool);
+  buy_nft : (nat64, text) -> (Result);
+  create_project : (text, text, text) -> (nat64);
+  get_marketplace_stats : () -> (nat64, nat64, nat64, nat64) query;
+  get_nft : (nat64) -> (opt NFTMetadata) query;
+  get_nft_transactions : (nat64) -> (vec Transaction) query;
+  get_project : (nat64) -> (opt MusicProject) query;
+  get_project_tracks : (nat64) -> (vec Track) query;
+  get_user_created_nfts : (text) -> (vec NFTMetadata) query;
+  get_user_nfts : (text) -> (vec NFTMetadata) query;
+  get_user_royalty_earnings : (text) -> (vec RoyaltyPayment) query;
+  list_nfts : () -> (vec NFTMetadata) query;
+  list_projects : () -> (vec MusicProject) query;
+  mint_nft : (text, text, text, text, nat64, nat64, text) -> (nat64);
+  remove_track : (nat64, nat64) -> (bool);
+  set_nft_for_sale : (nat64, bool, text) -> (Result);
+  transform_response : (TransformArgs) -> (HttpResponse) query;
+  update_nft_price : (nat64, nat64, text) -> (Result);
+  upload_to_pinata : (PinataUploadRequest) -> (PinataUploadResponse);
 }

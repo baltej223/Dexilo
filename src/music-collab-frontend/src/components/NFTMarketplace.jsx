@@ -276,14 +276,14 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
             className="btn-primary"
             onClick={() => setShowMintModal(true)}
           >
-            <span className="btn-icon">⚡</span>
+
             Quick Mint
           </button>
           <button 
             className="btn-gradient"
             onClick={() => setShowWaveformModal(true)}
           >
-            <span className="btn-icon">🎵</span>
+
             Audio NFT
           </button>
         </div>
@@ -353,7 +353,7 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
               className="btn-primary"
               onClick={() => setShowMintModal(true)}
             >
-              <span className="btn-icon">⚡</span>
+
               Mint Your First NFT
             </button>
             {marketplaceFilters.searchQuery && (
