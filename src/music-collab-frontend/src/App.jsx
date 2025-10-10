@@ -224,15 +224,15 @@ function App() {
             <p>Collaborate, create, and monetize your music on the decentralized web</p>
             <div className="login-features">
               <div className="feature">
-                <h3>🎼 Collaborative Creation</h3>
+                <h3>Collaborative Creation</h3>
                 <p>Work together on music projects in real-time</p>
               </div>
               <div className="feature">
-                <h3>💎 NFT Marketplace</h3>
+                <h3>NFT Marketplace</h3>
                 <p>Mint and trade music NFTs with automatic royalties</p>
               </div>
               <div className="feature">
-                <h3>🔒 Decentralized & Secure</h3>
+                <h3>Decentralized & Secure</h3>
                 <p>Your music and rights are protected on the blockchain</p>
               </div>
             </div>

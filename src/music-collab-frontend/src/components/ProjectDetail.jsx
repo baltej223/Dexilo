@@ -121,7 +121,7 @@ const ProjectDetail = ({ project, onBack, onUpdate, onStartCollaboration }) => {
               className="btn-primary" 
               onClick={() => onStartCollaboration && onStartCollaboration()}
             >
-              🤝 Start Collaboration
+              Start Collaboration
             </button>
           </div>
         </div>
