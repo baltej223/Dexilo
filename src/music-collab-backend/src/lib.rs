@@ -32,8 +32,32 @@ pub struct NFTMetadata {
     pub description: String,
     pub image_url: String,
     pub creator: String,
+    pub current_owner: String,
     pub project_id: u64,
     pub price: u64,
+    pub is_for_sale: bool,
+    pub royalty_percentage: u8,
+    pub created_at: u64,
+    pub view_count: u64,
+    pub sale_history: Vec<Transaction>,
+    pub category: String,
+}
+
+#[derive(CandidType, Deserialize, Clone)]
+pub struct Transaction {
+    pub from: String,
+    pub to: String,
+    pub price: u64,
+    pub timestamp: u64,
+    pub transaction_type: String, // "mint", "sale", "transfer"
+}
+
+#[derive(CandidType, Deserialize, Clone)]
+pub struct RoyaltyPayment {
+    pub recipient: String,
+    pub amount: u64,
+    pub nft_id: u64,
+    pub transaction_id: String,
 }
 
 #[derive(CandidType, Deserialize, Clone)]
@@ -56,6 +80,8 @@ pub struct PinataUploadResponse {
 thread_local! {
     static PROJECTS: std::cell::RefCell<HashMap<u64, MusicProject>> = std::cell::RefCell::new(HashMap::new());
     static NFTS: std::cell::RefCell<HashMap<u64, NFTMetadata>> = std::cell::RefCell::new(HashMap::new());
+    static TRANSACTIONS: std::cell::RefCell<Vec<Transaction>> = std::cell::RefCell::new(Vec::new());
+    static ROYALTY_PAYMENTS: std::cell::RefCell<Vec<RoyaltyPayment>> = std::cell::RefCell::new(Vec::new());
     static NEXT_ID: std::cell::RefCell<u64> = std::cell::RefCell::new(1);
     static NEXT_NFT_ID: std::cell::RefCell<u64> = std::cell::RefCell::new(1);
 }
@@ -162,7 +188,7 @@ fn get_project_tracks(project_id: u64) -> Vec<Track> {
 }
 
 #[ic_cdk::update]
-fn mint_nft(name: String, description: String, image_url: String, creator: String, project_id: u64, price: u64) -> u64 {
+fn mint_nft(name: String, description: String, image_url: String, creator: String, project_id: u64, price: u64, category: String) -> u64 {
     let id = NEXT_NFT_ID.with(|id| {
         let mut id = id.borrow_mut();
         let current = *id;
@@ -170,18 +196,40 @@ fn mint_nft(name: String, description: String, image_url: String, creator: Strin
         current
     });
     
+    let timestamp = ic_cdk::api::time();
+    
+    // Create mint transaction
+    let mint_transaction = Transaction {
+        from: "system".to_string(),
+        to: creator.clone(),
+        price: 0, // No price for minting
+        timestamp,
+        transaction_type: "mint".to_string(),
+    };
+    
     let nft = NFTMetadata {
         id,
         name,
         description,
         image_url,
-        creator,
+        creator: creator.clone(),
+        current_owner: creator,
         project_id,
         price,
+        is_for_sale: true,
+        royalty_percentage: 10, // Default 10% royalty
+        created_at: timestamp,
+        view_count: 0,
+        sale_history: vec![mint_transaction.clone()],
+        category,
     };
     
     NFTS.with(|nfts| {
         nfts.borrow_mut().insert(id, nft);
+    });
+    
+    TRANSACTIONS.with(|transactions| {
+        transactions.borrow_mut().push(mint_transaction);
     });
     
     id
@@ -196,7 +244,197 @@ fn list_nfts() -> Vec<NFTMetadata> {
 
 #[ic_cdk::query]
 fn get_nft(nft_id: u64) -> Option<NFTMetadata> {
-    NFTS.with(|nfts| nfts.borrow().get(&nft_id).cloned())
+    NFTS.with(|nfts| {
+        let mut nfts = nfts.borrow_mut();
+        if let Some(nft) = nfts.get_mut(&nft_id) {
+            // Increment view count
+            nft.view_count += 1;
+            Some(nft.clone())
+        } else {
+            None
+        }
+    })
+}
+
+#[ic_cdk::update]
+fn buy_nft(nft_id: u64, buyer: String) -> Result<String, String> {
+    NFTS.with(|nfts| {
+        let mut nfts = nfts.borrow_mut();
+        
+        if let Some(nft) = nfts.get_mut(&nft_id) {
+            // Validation checks
+            if !nft.is_for_sale {
+                return Err("NFT is not for sale".to_string());
+            }
+            
+            if nft.current_owner == buyer {
+                return Err("Cannot buy your own NFT".to_string());
+            }
+            
+            let sale_price = nft.price;
+            let seller = nft.current_owner.clone();
+            let creator = nft.creator.clone();
+            let timestamp = ic_cdk::api::time();
+            
+            // Calculate royalty (10% to creator if not the seller)
+            let royalty_amount = if creator != seller {
+                (sale_price * nft.royalty_percentage as u64) / 100
+            } else {
+                0
+            };
+            
+            let seller_amount = sale_price - royalty_amount;
+            
+            // Create sale transaction
+            let sale_transaction = Transaction {
+                from: seller.clone(),
+                to: buyer.clone(),
+                price: sale_price,
+                timestamp,
+                transaction_type: "sale".to_string(),
+            };
+            
+            // Update NFT ownership
+            nft.current_owner = buyer.clone();
+            nft.sale_history.push(sale_transaction.clone());
+            
+            // Record global transaction
+            TRANSACTIONS.with(|transactions| {
+                transactions.borrow_mut().push(sale_transaction);
+            });
+            
+            // Record royalty payment if applicable
+            if royalty_amount > 0 {
+                let royalty_payment = RoyaltyPayment {
+                    recipient: creator,
+                    amount: royalty_amount,
+                    nft_id,
+                    transaction_id: format!("{}_{}", nft_id, timestamp),
+                };
+                
+                ROYALTY_PAYMENTS.with(|payments| {
+                    payments.borrow_mut().push(royalty_payment);
+                });
+            }
+            
+            Ok(format!("NFT purchased successfully. Seller receives: {} ICP, Creator royalty: {} ICP", 
+                      seller_amount, royalty_amount))
+        } else {
+            Err("NFT not found".to_string())
+        }
+    })
+}
+
+#[ic_cdk::update]
+fn update_nft_price(nft_id: u64, new_price: u64, owner: String) -> Result<String, String> {
+    NFTS.with(|nfts| {
+        let mut nfts = nfts.borrow_mut();
+        
+        if let Some(nft) = nfts.get_mut(&nft_id) {
+            if nft.current_owner != owner {
+                return Err("Only the owner can update the price".to_string());
+            }
+            
+            let old_price = nft.price;
+            nft.price = new_price;
+            
+            Ok(format!("Price updated from {} to {} ICP", old_price, new_price))
+        } else {
+            Err("NFT not found".to_string())
+        }
+    })
+}
+
+#[ic_cdk::update]
+fn set_nft_for_sale(nft_id: u64, for_sale: bool, owner: String) -> Result<String, String> {
+    NFTS.with(|nfts| {
+        let mut nfts = nfts.borrow_mut();
+        
+        if let Some(nft) = nfts.get_mut(&nft_id) {
+            if nft.current_owner != owner {
+                return Err("Only the owner can change sale status".to_string());
+            }
+            
+            nft.is_for_sale = for_sale;
+            
+            Ok(if for_sale { 
+                "NFT is now for sale".to_string() 
+            } else { 
+                "NFT removed from sale".to_string() 
+            })
+        } else {
+            Err("NFT not found".to_string())
+        }
+    })
+}
+
+#[ic_cdk::query]
+fn get_nft_transactions(nft_id: u64) -> Vec<Transaction> {
+    NFTS.with(|nfts| {
+        nfts.borrow()
+            .get(&nft_id)
+            .map(|nft| nft.sale_history.clone())
+            .unwrap_or_default()
+    })
+}
+
+#[ic_cdk::query]
+fn get_user_nfts(user: String) -> Vec<NFTMetadata> {
+    NFTS.with(|nfts| {
+        nfts.borrow()
+            .values()
+            .filter(|nft| nft.current_owner == user)
+            .cloned()
+            .collect()
+    })
+}
+
+#[ic_cdk::query]
+fn get_user_created_nfts(creator: String) -> Vec<NFTMetadata> {
+    NFTS.with(|nfts| {
+        nfts.borrow()
+            .values()
+            .filter(|nft| nft.creator == creator)
+            .cloned()
+            .collect()
+    })
+}
+
+#[ic_cdk::query]
+fn get_user_royalty_earnings(user: String) -> Vec<RoyaltyPayment> {
+    ROYALTY_PAYMENTS.with(|payments| {
+        payments.borrow()
+            .iter()
+            .filter(|payment| payment.recipient == user)
+            .cloned()
+            .collect()
+    })
+}
+
+#[ic_cdk::query]
+fn get_marketplace_stats() -> (u64, u64, u64, u64) {
+    let total_nfts = NFTS.with(|nfts| nfts.borrow().len() as u64);
+    let nfts_for_sale = NFTS.with(|nfts| {
+        nfts.borrow()
+            .values()
+            .filter(|nft| nft.is_for_sale)
+            .count() as u64
+    });
+    let total_transactions = TRANSACTIONS.with(|transactions| {
+        transactions.borrow()
+            .iter()
+            .filter(|tx| tx.transaction_type == "sale")
+            .count() as u64
+    });
+    let total_volume = TRANSACTIONS.with(|transactions| {
+        transactions.borrow()
+            .iter()
+            .filter(|tx| tx.transaction_type == "sale")
+            .map(|tx| tx.price)
+            .sum::<u64>()
+    });
+    
+    (total_nfts, nfts_for_sale, total_transactions, total_volume)
 }
 
 #[ic_cdk::update]
