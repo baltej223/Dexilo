@@ -30,9 +30,7 @@ Dexilo is a decentralized B2B SaaS platform on ICP, empowering music platforms w
 - [API Documentation](#api-documentation)
 - [Security](#security)
 - [Legal Framework](#legal-framework)
-- [Roadmap](#roadmap)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -179,11 +177,6 @@ dfx start --background
 dfx deploy
 ```
 
-### 6. Start Frontend Development Server
-```bash
-npm start
-```
-
 ## Development
 
 ### Building the Project
@@ -296,19 +289,11 @@ The backend exposes type-safe APIs through Candid interfaces. Key endpoints incl
 - Regulatory engagement through sandbox programs
 - Decentralized arbitration network for dispute resolution
 
-## Roadmap
-
-### MVP Timeline: 2 Hours (Current Focus)
-- Frontend redesign with Pinata-inspired UI
-- Core backend canisters (collaboration, sync licensing, NFTs)
-- Basic waveform visualizations (Watercolor, Ink Brush, Mandala)
-- Internet Identity authentication
-
 ### Post-MVP Enhancements
 - **AI-Powered Features**: Collaboration recommendations and smart matching
 - **Mobile Applications**: Native iOS and Android apps
 - **VR Collaboration**: Immersive virtual reality environments
-- **Cross-Chain Support**: Interoperability with other blockchain networks
+- **Cross-Chain Support**: Interoperability with other blockchain EVM Compatible networks
 - **Advanced Visualizations**: Holographic and Galaxy waveform styles
 - **Security Hardening**: Comprehensive smart contract audits
 
@@ -327,12 +312,6 @@ We welcome contributions to improve Dexilo. Please follow these steps:
 - Write comprehensive tests for new features
 - Ensure accessibility compliance (WCAG 2.1 AA)
 - Update documentation for API changes
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 **Dexilo** - Empowering music platforms with decentralized collaboration, sync licensing, and NFT services on the Internet Computer Protocol.
 

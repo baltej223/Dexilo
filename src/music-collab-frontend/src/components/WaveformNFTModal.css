@@ -17,7 +17,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--background-overlay);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
