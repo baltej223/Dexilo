@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NFTCard.css';
 
-const NFTCard = ({ nft, project, isOwner, onBuy, onTransfer }) => {
-  const handlePurchase = () => {
-    if (onBuy && !isOwner) {
-      onBuy(nft);
+const NFTCard = ({ 
+  nft, 
+  project, 
+  isOwner, 
+  onBuy, 
+  onTransfer, 
+  onViewDetails, 
+  onUpdatePrice,
+  showQuickActions = true 
+}) => {
+  const [showActions, setShowActions] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handlePurchase = async () => {
+    if (onBuy && !isOwner && !isLoading) {
+      setIsLoading(true);
+      try {
+        await onBuy(nft);
+      } catch (error) {
+        console.error('Purchase failed:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const handleViewDetails = () => {
+    if (onViewDetails) {
+      onViewDetails(nft);
     }
   };
 
@@ -12,8 +37,19 @@ const NFTCard = ({ nft, project, isOwner, onBuy, onTransfer }) => {
     return (Number(price) / 1000000).toFixed(2); // Convert from smallest unit to ICP
   };
 
+  const getStatusBadge = () => {
+    if (isOwner) {
+      return <div className="status-badge owned">Owned</div>;
+    }
+    return <div className="status-badge for-sale">For Sale</div>;
+  };
+
   return (
-    <div className="nft-card">
+    <div 
+      className={`nft-card ${isOwner ? 'owned' : 'for-sale'}`}
+      onMouseEnter={() => setShowActions(true)}
+      onMouseLeave={() => setShowActions(false)}
+    >
       <div className="nft-image">
         {nft.image_url ? (
           <img src={nft.image_url} alt={nft.name} />
@@ -22,43 +58,130 @@ const NFTCard = ({ nft, project, isOwner, onBuy, onTransfer }) => {
             <span className="music-icon">🎵</span>
           </div>
         )}
-        {isOwner && <div className="owner-badge">Owned</div>}
+        
+        {/* Status Badge */}
+        {getStatusBadge()}
+        
+        {/* Quick Actions Overlay */}
+        {showQuickActions && (
+          <div className={`quick-actions-overlay ${showActions ? 'visible' : ''}`}>
+            <button 
+              className="quick-action-btn view-btn"
+              onClick={handleViewDetails}
+              title="View Details"
+            >
+              👁️
+            </button>
+            {!isOwner && (
+              <button 
+                className="quick-action-btn buy-btn"
+                onClick={handlePurchase}
+                disabled={isLoading}
+                title="Quick Buy"
+              >
+                {isLoading ? '⏳' : '💎'}
+              </button>
+            )}
+            {isOwner && onUpdatePrice && (
+              <button 
+                className="quick-action-btn edit-btn"
+                onClick={() => onUpdatePrice(nft)}
+                title="Update Price"
+              >
+                ✏️
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* NFT ID Badge */}
+        <div className="nft-id-badge">#{nft.id}</div>
       </div>
       
       <div className="nft-content">
         <div className="nft-header">
-          <h3 className="nft-name">{nft.name}</h3>
+          <h3 className="nft-name" title={nft.name}>{nft.name}</h3>
           <div className="nft-price">
-            {formatPrice(nft.price)} ICP
+            <span className="price-amount">{formatPrice(nft.price)}</span>
+            <span className="price-currency">ICP</span>
           </div>
         </div>
         
-        <p className="nft-description">{nft.description}</p>
+        <p className="nft-description" title={nft.description}>
+          {nft.description.length > 80 
+            ? `${nft.description.substring(0, 80)}...` 
+            : nft.description
+          }
+        </p>
         
         <div className="nft-meta">
           <div className="nft-creator">
-            <strong>Creator:</strong> {nft.creator.slice(0, 8)}...
+            <span className="meta-label">Creator:</span>
+            <span className="meta-value" title={nft.creator}>
+              {nft.creator.slice(0, 6)}...{nft.creator.slice(-4)}
+            </span>
           </div>
+          
+          {(nft.current_owner && nft.current_owner !== nft.creator) && (
+            <div className="nft-owner">
+              <span className="meta-label">Owner:</span>
+              <span className="meta-value" title={nft.current_owner}>
+                {nft.current_owner.slice(0, 6)}...{nft.current_owner.slice(-4)}
+              </span>
+            </div>
+          )}
+          
           {project && (
             <div className="nft-project">
-              <strong>Project:</strong> {project.title}
+              <span className="meta-label">Project:</span>
+              <span className="meta-value" title={project.title}>{project.title}</span>
             </div>
           )}
         </div>
         
         <div className="nft-actions">
           {isOwner ? (
-            <button className="btn-secondary" disabled>
-              You own this NFT
-            </button>
+            <div className="owner-actions">
+              <button 
+                className="btn-secondary view-details-btn"
+                onClick={handleViewDetails}
+              >
+                View Details
+              </button>
+              {onUpdatePrice && (
+                <button 
+                  className="btn-outline update-price-btn"
+                  onClick={() => onUpdatePrice(nft)}
+                >
+                  Update Price
+                </button>
+              )}
+            </div>
           ) : (
             <button 
-              className="btn-primary"
+              className={`btn-primary buy-btn ${isLoading ? 'loading' : ''}`}
               onClick={handlePurchase}
+              disabled={isLoading}
             >
-              Buy for {formatPrice(nft.price)} ICP
+              {isLoading ? (
+                <>
+                  <span className="loading-spinner"></span>
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <span className="buy-icon">💎</span>
+                  Buy for {formatPrice(nft.price)} ICP
+                </>
+              )}
             </button>
           )}
+        </div>
+
+        {/* Royalty Info */}
+        <div className="royalty-info">
+          <span className="royalty-icon">💎</span>
+          <span className="royalty-text">10% royalty to creator</span>
         </div>
       </div>
     </div>

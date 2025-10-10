@@ -178,7 +178,8 @@ function App() {
         nftData.image_url,
         nftData.creator,
         BigInt(nftData.project_id),
-        BigInt(nftData.price)
+        BigInt(nftData.price),
+        nftData.category || 'general'
       );
       await loadNFTs();
       
