@@ -1,0 +1,347 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap');
+
+.home-container {
+  min-height: 100vh;
+  background: hsl(255, 23%, 10%) !important;
+  color: #111111;
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+/* Set body background to match navigation */
+body {
+  background: #171420 !important;
+}
+
+/* Override App.css global styles for Home component */
+.home-container * {
+  color: inherit;
+}
+
+.home-container h1,
+.home-container h2,
+.home-container h3,
+.home-container p,
+.home-container span {
+  color: inherit;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  min-height: 80vh;
+  background-image: url('/background.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border-radius: 32px;
+  margin: 2rem;
+}
+
+.hero-content {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 4rem 3rem;
+  max-width: 1000px;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Flexbox 1: Top section with text and logo */
+.hero-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.hero-text-left {
+  flex: 1;
+  text-align: left;
+}
+
+.hero-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.hero-logo-img {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #666666;
+  line-height: 1.6;
+  text-align: left;
+  margin: 0;
+}
+
+
+
+/* Flexbox 2: Actions section */
+.hero-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Hero Buttons - Minimalist Style */
+.btn-primary-hero {
+  background: #6d57ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.btn-primary-hero:hover {
+  opacity: 0.8;
+}
+
+.btn-secondary-hero {
+  background: #4de5a6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.btn-secondary-hero:hover {
+  opacity: 0.8;
+}
+
+.btn-tertiary-hero {
+  background: #ff9900;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.btn-tertiary-hero:hover {
+  opacity: 0.8;
+}
+
+/* Features Section */
+.features-section {
+  padding: 6rem 2rem;
+  background: #171420;
+}
+
+.features-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  transition: border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  border-color: #cccccc;
+}
+
+.feature-card-icon {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  width: 40px;
+  height: 40px;
+  color: white;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-nft { background: #6d57ff; }
+.icon-cert { background: #4de5a6; }
+.icon-wave { background: #f093ff; }
+.icon-secure { background: #ff9900; }
+.icon-analytics { background: #00cc92; }
+.icon-licensing { background: #de5242; }
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #111111;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  color: #666666;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* CTA Section */
+.cta-section {
+  background: #ffffff;
+  padding: 8rem 2rem 6rem 2rem;
+  text-align: center;
+  border-top-left-radius: 80px;
+  border-top-right-radius: 80px;
+}
+
+.cta-content h2 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #111111;
+  margin-bottom: 1.5rem;
+}
+
+.cta-content p {
+  font-size: 1.25rem;
+  color: #666666;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-cta {
+  background: #111111;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 4px;
+  padding: 1.25rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.btn-cta:hover {
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-top {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .hero-text-left {
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .hero-content {
+    padding: 2.5rem 2rem;
+  }
+  
+  .hero-logo {
+    justify-content: center;
+  }
+  
+  .hero-logo-img {
+    width: 80px;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-primary-hero,
+  .btn-secondary-hero,
+  .btn-tertiary-hero {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    color: #ffffff !important;
+    font-size: 2rem;
+  }
+  
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .features-section {
+    padding: 4rem 1rem;
+  }
+  
+  .feature-card {
+    padding: 2rem;
+  }
+}

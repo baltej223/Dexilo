@@ -6,6 +6,7 @@ import ProjectDetail from './components/ProjectDetail';
 import NFTMarketplace from './components/NFTMarketplace';
 import CollaborationHub from './components/CollaborationHub';
 import Navigation from './components/Navigation';
+import Home from './components/Home';
 import ToastContainer from './components/ToastContainer';
 import PinataDebugPanel from './components/PinataDebugPanel';
 import './App.css';
@@ -14,7 +15,7 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [nfts, setNFTs] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [currentView, setCurrentView] = useState('dashboard'); // 'dashboard', 'projects', 'create', 'detail', 'nft', 'collaborate'
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'dashboard', 'projects', 'create', 'detail', 'nft', 'collaborate'
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -47,6 +48,7 @@ const handleLogin = async () => {
     setUser(userInfo);
     // ✅ Pass userInfo directly
     await initializeApp(userInfo);
+    setCurrentView('dashboard'); // Redirect to dashboard after login
   } catch (error) {
     console.error('Login failed:', error);
     if (window.showToast) {
@@ -66,7 +68,7 @@ const handleLogin = async () => {
       setProjects([]);
       setNFTs([]);
       setSelectedProject(null);
-      setCurrentView('dashboard');
+      setCurrentView('home');
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -251,6 +253,14 @@ const initializeApp = async (userInfo) => {
     }
 
     switch (currentView) {
+      case 'home':
+        return (
+          <Home 
+            onNavigate={setCurrentView} 
+            onLogin={handleLogin}
+            user={user}
+          />
+        );
       case 'projects':
         return (
           <ProjectList
@@ -346,14 +356,13 @@ const initializeApp = async (userInfo) => {
   return (
     <div className="App">
       <PinataDebugPanel />
-      {user && (
-        <Navigation 
-          currentView={currentView}
-          onViewChange={setCurrentView}
-          user={user}
-          onLogout={handleLogout}
-        />
-      )}
+      <Navigation 
+        currentView={currentView}
+        onViewChange={setCurrentView}
+        user={user}
+        onLogout={handleLogout}
+        onLogin={handleLogin}
+      />
       <main className="App-main">
         {isAuthenticating && !user ? (
           <div className="loading-screen">
