@@ -1,4 +1,5 @@
 import React from 'react';
+import { Flame, Star, Music, Eye, Gem, Diamond } from 'lucide-react';
 import './FeaturedNFTs.css';
 
 const FeaturedNFTs = ({ nfts = [], onBuy, onViewDetails, user }) => {
@@ -23,7 +24,7 @@ const FeaturedNFTs = ({ nfts = [], onBuy, onViewDetails, user }) => {
   return (
     <div className="featured-nfts">
       <div className="featured-header">
-        <h3>🔥 Featured NFTs</h3>
+        <h3><Flame size={20} /> Featured NFTs</h3>
         <p>Discover the most valuable music NFTs in our marketplace</p>
       </div>
 
@@ -31,8 +32,8 @@ const FeaturedNFTs = ({ nfts = [], onBuy, onViewDetails, user }) => {
         {featuredNFTs.map((nft, index) => (
           <div key={nft.id} className={`featured-card ${index < 3 ? 'primary' : 'secondary'}`}>
             <div className="card-badges">
-              {index === 0 && <div className="badge hot">🔥 Hot</div>}
-              {index < 3 && <div className="badge featured">⭐ Featured</div>}
+              {index === 0 && <div className="badge hot"><Flame size={12} /> Hot</div>}
+              {index < 3 && <div className="badge featured"><Star size={12} /> Featured</div>}
               <div className="badge price-badge">{formatPrice(nft.price)} ICP</div>
             </div>
 
@@ -41,7 +42,7 @@ const FeaturedNFTs = ({ nfts = [], onBuy, onViewDetails, user }) => {
                 <img src={nft.image_url} alt={nft.name} />
               ) : (
                 <div className="placeholder-image">
-                  <span className="music-icon">🎵</span>
+                  <span className="music-icon"><Music size={24} /></span>
                 </div>
               )}
               <div className="image-overlay">
@@ -50,14 +51,14 @@ const FeaturedNFTs = ({ nfts = [], onBuy, onViewDetails, user }) => {
                   onClick={() => onViewDetails?.(nft)}
                   title="Quick View"
                 >
-                  👁️
+                  <Eye size={16} />
                 </button>
                 <button 
                   className="quick-buy-btn"
                   onClick={() => onBuy?.(nft)}
                   title="Quick Buy"
                 >
-                  💎
+                  <Gem size={16} />
                 </button>
               </div>
             </div>
@@ -83,7 +84,7 @@ const FeaturedNFTs = ({ nfts = [], onBuy, onViewDetails, user }) => {
                 className="featured-buy-btn"
                 onClick={() => onBuy?.(nft)}
               >
-                <span className="buy-icon">💎</span>
+                <span className="buy-icon"><Diamond size={16} /></span>
                 Buy Now
               </button>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Music, Gem, PartyPopper, X, Globe, User, ShoppingCart, Diamond } from 'lucide-react';
 import NFTCard from './NFTCard';
 import MintNFTModal from './MintNFTModal';
 import WaveformNFTModal from './WaveformNFTModal';
@@ -228,8 +229,8 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
       {showSuccessMessage && successData && (
         <div className="nft-success-message">
           <div className="success-icon">
-            {successData.type === 'Audio NFT' ? '🎵' : 
-             successData.type === 'Purchase' ? '💎' : '🎉'}
+            {successData.type === 'Audio NFT' ? <Music size={24} /> : 
+             successData.type === 'Purchase' ? <Diamond size={24} /> : <PartyPopper size={24} />}
           </div>
           <div className="success-content">
             <h4>
@@ -260,7 +261,7 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
             }}
             title="Dismiss"
           >
-            ✕
+            <X size={16} />
           </button>
         </div>
       )}
@@ -305,21 +306,21 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
             className={`filter-tab ${filter === 'all' ? 'active' : ''}`}
             onClick={() => setFilter('all')}
           >
-            <span className="tab-icon">🌐</span>
+            <span className="tab-icon"><Globe size={16} /></span>
             All NFTs ({nfts.length})
           </button>
           <button 
             className={`filter-tab ${filter === 'my' ? 'active' : ''}`}
             onClick={() => setFilter('my')}
           >
-            <span className="tab-icon">👤</span>
+            <span className="tab-icon"><User size={16} /></span>
             My NFTs ({nfts.filter(nft => (nft.current_owner || nft.creator) === user?.principal).length})
           </button>
           <button 
             className={`filter-tab ${filter === 'available' ? 'active' : ''}`}
             onClick={() => setFilter('available')}
           >
-            <span className="tab-icon">🛒</span>
+            <span className="tab-icon"><ShoppingCart size={16} /></span>
             Available ({nfts.filter(nft => (nft.current_owner || nft.creator) !== user?.principal).length})
           </button>
         </div>
@@ -338,7 +339,7 @@ const NFTMarketplace = ({ nfts, projects, onRefresh, onRefreshProjects, onMintNF
       {/* NFTs Grid */}
       {filteredAndSortedNFTs.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-icon">💎</div>
+          <div className="empty-icon"><Gem size={48} /></div>
           <h3>No NFTs found</h3>
           <p>
             {filter === 'my' 

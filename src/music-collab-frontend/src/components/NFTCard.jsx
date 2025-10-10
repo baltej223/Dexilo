@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Music, Eye, Gem, Clock, Edit, Diamond } from 'lucide-react';
 import './NFTCard.css';
 
 const NFTCard = ({ 
@@ -55,7 +56,7 @@ const NFTCard = ({
           <img src={nft.image_url} alt={nft.name} />
         ) : (
           <div className="placeholder-image">
-            <span className="music-icon">🎵</span>
+            <span className="music-icon"><Music size={24} /></span>
           </div>
         )}
         
@@ -70,7 +71,7 @@ const NFTCard = ({
               onClick={handleViewDetails}
               title="View Details"
             >
-              👁️
+              <Eye size={16} />
             </button>
             {!isOwner && (
               <button 
@@ -79,7 +80,7 @@ const NFTCard = ({
                 disabled={isLoading}
                 title="Quick Buy"
               >
-                {isLoading ? '⏳' : '💎'}
+                {isLoading ? <Clock size={16} /> : <Gem size={16} />}
               </button>
             )}
             {isOwner && onUpdatePrice && (
@@ -88,7 +89,7 @@ const NFTCard = ({
                 onClick={() => onUpdatePrice(nft)}
                 title="Update Price"
               >
-                ✏️
+                <Edit size={16} />
               </button>
             )}
           </div>
@@ -170,7 +171,7 @@ const NFTCard = ({
                 </>
               ) : (
                 <>
-                  <span className="buy-icon">💎</span>
+                  <span className="buy-icon"><Diamond size={16} /></span>
                   Buy for {formatPrice(nft.price)} ICP
                 </>
               )}
@@ -180,7 +181,7 @@ const NFTCard = ({
 
         {/* Royalty Info */}
         <div className="royalty-info">
-          <span className="royalty-icon">💎</span>
+          <span className="royalty-icon"><Diamond size={12} /></span>
           <span className="royalty-text">10% royalty to creator</span>
         </div>
       </div>

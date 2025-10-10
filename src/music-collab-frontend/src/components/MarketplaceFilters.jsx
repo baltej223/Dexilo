@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Search, X } from 'lucide-react';
 import './MarketplaceFilters.css';
 
 const MarketplaceFilters = ({ 
@@ -82,7 +83,7 @@ const MarketplaceFilters = ({
       {/* Search Bar */}
       <div className="search-section">
         <div className="search-input-wrapper">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon"><Search size={16} /></span>
           <input
             type="text"
             placeholder="Search NFTs by name, creator, or description..."
@@ -98,7 +99,7 @@ const MarketplaceFilters = ({
                 onSearch?.('');
               }}
             >
-              ✕
+              <X size={14} />
             </button>
           )}
         </div>
@@ -221,21 +222,21 @@ const MarketplaceFilters = ({
               <button onClick={() => {
                 setSearchQuery('');
                 onSearch?.('');
-              }}>✕</button>
+              }}><X size={12} /></button>
             </span>
           )}
           
           {selectedCategory !== 'all' && (
             <span className="filter-tag">
               Category: {categories.find(c => c.value === selectedCategory)?.label}
-              <button onClick={() => handleCategoryChange('all')}>✕</button>
+              <button onClick={() => handleCategoryChange('all')}><X size={12} /></button>
             </span>
           )}
           
           {(priceRange.min > 0 || priceRange.max < 1000) && (
             <span className="filter-tag">
               Price: {priceRange.min} - {priceRange.max} ICP
-              <button onClick={() => handlePriceRangeChange('min', 0) || handlePriceRangeChange('max', 1000)}>✕</button>
+              <button onClick={() => handlePriceRangeChange('min', 0) || handlePriceRangeChange('max', 1000)}><X size={12} /></button>
             </span>
           )}
         </div>

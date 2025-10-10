@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { X, Music, Diamond } from 'lucide-react';
 import './BuyNFTModal.css';
 
 const BuyNFTModal = ({ nft, project, onBuy, onClose, user }) => {
@@ -33,7 +34,7 @@ const BuyNFTModal = ({ nft, project, onBuy, onClose, user }) => {
       <div className="buy-nft-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Purchase NFT</h2>
-          <button className="close-btn" onClick={onClose}>✕</button>
+          <button className="close-btn" onClick={onClose}><X size={20} /></button>
         </div>
 
         <div className="modal-content">
@@ -44,7 +45,7 @@ const BuyNFTModal = ({ nft, project, onBuy, onClose, user }) => {
                 <img src={nft.image_url} alt={nft.name} />
               ) : (
                 <div className="placeholder-image">
-                  <span className="music-icon">🎵</span>
+                  <span className="music-icon"><Music size={24} /></span>
                 </div>
               )}
             </div>
@@ -99,7 +100,7 @@ const BuyNFTModal = ({ nft, project, onBuy, onClose, user }) => {
           {/* Royalty Information */}
           <div className="royalty-section">
             <div className="royalty-header">
-              <span className="royalty-icon">💎</span>
+              <span className="royalty-icon"><Diamond size={16} /></span>
               <h4>Royalty Information</h4>
             </div>
             <p className="royalty-text">
@@ -154,7 +155,7 @@ const BuyNFTModal = ({ nft, project, onBuy, onClose, user }) => {
               </>
             ) : (
               <>
-                <span className="purchase-icon">💎</span>
+                <span className="purchase-icon"><Diamond size={16} /></span>
                 Buy for {formatPrice(nft.price)} ICP
               </>
             )}
