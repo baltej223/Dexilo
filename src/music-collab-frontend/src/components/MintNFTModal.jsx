@@ -73,21 +73,22 @@ const MintNFTModal = ({ projects, onSubmit, onClose, onRefreshProjects, user }) 
               value={formData.description}
               onChange={handleChange}
               placeholder="Describe your NFT..."
-              rows="3"
+              rows="4"
               required
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="projectId">Source Project *</label>
-            <select
-              id="projectId"
-              name="projectId"
-              value={formData.projectId}
-              onChange={handleChange}
-              required
-              className="project-select"
-            >
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="projectId">Source Project *</label>
+              <select
+                id="projectId"
+                name="projectId"
+                value={formData.projectId}
+                onChange={handleChange}
+                required
+                className="project-select"
+              >
               <option value="">Select a project</option>
               {Array.isArray(projects) && projects.length > 0 ? (
                 projects.map((project, index) => {
@@ -133,6 +134,22 @@ const MintNFTModal = ({ projects, onSubmit, onClose, onRefreshProjects, user }) 
                 </div>
               </div>
             )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="price">Price (ICP) *</label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                placeholder="0.5"
+                step="0.01"
+                min="0"
+                required
+              />
+            </div>
           </div>
 
           <div className="form-group">
@@ -146,21 +163,6 @@ const MintNFTModal = ({ projects, onSubmit, onClose, onRefreshProjects, user }) 
               placeholder="https://example.com/artwork.jpg"
             />
             <small>Leave empty to generate a random image</small>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="price">Price (ICP) *</label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              placeholder="0.5"
-              step="0.01"
-              min="0"
-              required
-            />
           </div>
 
           <div className="form-actions">
