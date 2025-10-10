@@ -23,40 +23,41 @@ function App() {
     initializeAuth();
   }, []);
 
-  const initializeAuth = async () => {
-    setIsAuthenticating(true);
-    try {
-      const isAuthenticated = await authService.init();
-      if (isAuthenticated) {
-        const userInfo = authService.getUserInfo();
-        setUser(userInfo);
-        await initializeApp();
-      }
-    } catch (error) {
-      console.error('Error initializing authentication:', error);
-    } finally {
-      setIsAuthenticating(false);
-    }
-  };
-
-  const handleLogin = async () => {
-    setIsAuthenticating(true);
-    try {
-      const userInfo = await authService.login();
+const initializeAuth = async () => {
+  setIsAuthenticating(true);
+  try {
+    const isAuthenticated = await authService.init();
+    if (isAuthenticated) {
+      const userInfo = authService.getUserInfo();
       setUser(userInfo);
-      await initializeApp();
-    } catch (error) {
-      console.error('Login failed:', error);
-      // Use toast instead of alert for better UX
-      if (window.showToast) {
-        window.showToast('Login failed. Please try again.', 'error');
-      } else {
-        alert('Login failed. Please try again.');
-      }
-    } finally {
-      setIsAuthenticating(false);
+      // ✅ Pass userInfo directly instead of relying on state
+      await initializeApp(userInfo);
     }
-  };
+  } catch (error) {
+    console.error('Error initializing authentication:', error);
+  } finally {
+    setIsAuthenticating(false);
+  }
+};
+
+const handleLogin = async () => {
+  setIsAuthenticating(true);
+  try {
+    const userInfo = await authService.login();
+    setUser(userInfo);
+    // ✅ Pass userInfo directly
+    await initializeApp(userInfo);
+  } catch (error) {
+    console.error('Login failed:', error);
+    if (window.showToast) {
+      window.showToast('Login failed. Please try again.', 'error');
+    } else {
+      alert('Login failed. Please try again.');
+    }
+  } finally {
+    setIsAuthenticating(false);
+  }
+};
 
   const handleLogout = async () => {
     try {
@@ -71,21 +72,22 @@ function App() {
     }
   };
 
-  const initializeApp = async () => {
-    if (!user) return;
-    
-    setLoading(true);
-    try {
-      await Promise.all([
-        loadProjects(),
-        loadNFTs()
-      ]);
-    } catch (error) {
-      console.error('Error initializing app:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+// ✅ Accept userInfo as parameter
+const initializeApp = async (userInfo) => {
+  if (!userInfo) return;
+  
+  setLoading(true);
+  try {
+    await Promise.all([
+      loadProjects(),
+      loadNFTs()
+    ]);
+  } catch (error) {
+    console.error('Error initializing app:', error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const loadProjects = async () => {
     try {
