@@ -16,10 +16,24 @@ const CollaborationHub = ({ project, onBack, user }) => {
       return;
     }
 
+    console.log('Starting track upload with data:', trackData);
+    console.log('Project:', project);
+    console.log('User:', user);
+
     setLoading(true);
     try {
       const actor = authService.getActor();
+      console.log('Actor obtained:', !!actor);
+      
       if (!actor) throw new Error('No authenticated actor available');
+      
+      console.log('About to call add_track with params:', {
+        projectId: BigInt(project.id),
+        name: trackData.name,
+        ipfsHash: trackData.ipfsHash,
+        uploadedBy: trackData.uploadedBy,
+        timestamp: BigInt(Date.now())
+      });
       
       // Add track to the project using the existing backend function
       const success = await actor.add_track(
@@ -29,6 +43,8 @@ const CollaborationHub = ({ project, onBack, user }) => {
         trackData.uploadedBy,
         BigInt(Date.now()) // Convert to BigInt for IC
       );
+      
+      console.log('add_track result:', success);
       
       if (success) {
         // Show success toast instead of alert
@@ -41,9 +57,24 @@ const CollaborationHub = ({ project, onBack, user }) => {
         throw new Error('Failed to add track to project');
       }
     } catch (error) {
-      console.error('Error uploading track:', error);
+      console.error('Error adding track to project:', error);
+      
+      // More detailed error logging
+      console.error('Error details:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name,
+        cause: error.cause
+      });
+      
+      const errorMessage = error.message.includes('Failed to fetch') 
+        ? 'Network connection failed. Please check if the backend canister is running.'
+        : `Failed to add track: ${error.message}`;
+        
       if (window.showToast) {
-        window.showToast('Failed to upload track. Please try again.', 'error');
+        window.showToast(errorMessage, 'error');
+      } else {
+        alert(errorMessage);
       }
     } finally {
       setLoading(false);

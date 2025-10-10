@@ -5,8 +5,7 @@ const MAX_TIME_TO_LIVE = BigInt(7 * 24 * 60 * 60 * 1000 * 1000 * 1000); // 7 day
 
 // Environment variables with fallbacks
 const DFX_NETWORK = import.meta.env.DFX_NETWORK || 'local';
-// const LOCAL_HOST = 'http://localhost:4943';
-const LOCAL_HOST = 'http://uzt4z-lp777-77774-qaabq-cai.localhost:4943/';
+const LOCAL_HOST = 'http://localhost:4943';
 const BACKEND_CANISTER_ID = import.meta.env.CANISTER_ID_MUSIC_COLLAB_BACKEND || 'u6s2n-gx777-77774-qaaba-cai';
 const INTERNET_IDENTITY_CANISTER_ID = import.meta.env.CANISTER_ID_INTERNET_IDENTITY || 'uxrrr-q7777-77774-qaaaq-cai';
 
