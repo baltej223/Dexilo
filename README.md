@@ -239,7 +239,7 @@ npm run dev
 
 ## API Documentation
 
-### Candid Interface
+### Interface Lookthrough
 The backend exposes type-safe APIs through Candid interfaces. Key endpoints include:
 
 #### Project Management
